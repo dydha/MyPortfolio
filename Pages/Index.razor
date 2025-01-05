@@ -1,0 +1,25 @@
+@page "/"
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudGrid>
+        <MudItem xs="12" sm="4" Class="d-flex justify-center">
+            <MudAvatar Style="width: 250px; height: 250px;" Class="mud-elevation-8">
+                <MudImage Src="/images/profilCoverUrl.jpg" Alt="Photo de profil"/>
+            </MudAvatar>
+        </MudItem>
+        <MudItem xs="12" sm="8" Style="text-align : center;">
+            <MudText  Typo="Typo.h3" Class="mb-4">Bonjour, je suis Dydha MPANDOU</MudText>
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">
+                Développeur Backend C# .NET passionné
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-8">
+                Spécialisé en Blazor et architectures modernes, je crée des solutions robustes et évolutives.
+                Passionné par les bonnes pratiques de développement et l'innovation technologique.
+            </MudText>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" 
+                       Href="/contact" StartIcon="@Icons.Material.Filled.Email">
+                Me Contacter
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

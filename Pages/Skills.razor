@@ -1,0 +1,162 @@
+@page "/experience"
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudText Typo="Typo.h3" Class="mb-8">Compétences & Expertise</MudText>
+
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="4" Class="mb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Technologies</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudList T="Skill">
+                        @foreach (var skill in _backendSkills)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudText>@skill.Name</MudText>
+                                @* <MudProgressLinear Color="Color.Primary" Value="@skill.Level" Class="my-2"/> *@
+                            </MudListItem>
+                        }
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+       @if(_certifications.Count > 0)
+       {
+            <MudItem xs="12" md="6">
+            <MudCard Elevation="4" Class="mb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Certifications</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudList T="Certification">
+                        @foreach (var cert in _certifications)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.WorkspacePremium">
+                                <MudText Typo="Typo.h6">@cert.Name</MudText>
+                                <MudText Typo="Typo.body2">@cert.Issuer - @cert.Year</MudText>
+                            </MudListItem>
+                        }
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+       }
+
+        <MudItem xs="12">
+            <MudCard Elevation="4" Class="mb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">Cybersécurité et DevOps : Une Nouvelle Passion</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudChip T="string" Icon="@Icons.Material.Filled.Rocket" 
+                                Color="Color.Secondary" 
+                                Size="Size.Small">
+                            Work in Progress
+                        </MudChip>
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudText Class="mb-4">
+                                Animé par une soif constante de savoir, je m'aventure dans les domaines de la cybersécurité 
+                                et du DevOps. Ces disciplines, au carrefour de l'innovation et de la résilience, 
+                                captivent mon esprit analytique et mon envie d'évoluer.
+                            </MudText>
+                        </MudItem>
+
+                        <MudItem xs="12" sm="6">
+                            <MudPaper Class="pa-4" Elevation="0">
+                                <MudText Typo="Typo.h6" Color="Color.Primary" Class="mb-4">
+                                    <MudIcon Icon="@Icons.Material.Filled.Security" Class="mr-2"/>
+                                    Objectifs et Ambitions
+                                </MudText>
+                                <MudText>
+                                    Mon ambition est de maîtriser les outils et méthodologies modernes pour sécuriser 
+                                    les systèmes et déployer efficacement des applications. Que ce soit en automatisant 
+                                    les processus ou en fortifiant les infrastructures, je suis déterminé à repousser mes limites.
+                                </MudText>
+                            </MudPaper>
+                        </MudItem>
+
+                        <MudItem xs="12" sm="6">
+                            <MudPaper Class="pa-4" Elevation="0">
+                                <MudText Typo="Typo.h6" Color="Color.Primary" Class="mb-4">
+                                    <MudIcon Icon="@Icons.Material.Filled.School" Class="mr-2"/>
+                                    Engagement envers l'Apprentissage
+                                </MudText>
+                                <MudList Dense="true" T="string" >
+                                    <MudListItem Icon="@Icons.Custom.Brands.MicrosoftAzureDevOps">
+                                        Conteneurisation avec Docker
+                                    </MudListItem>
+                                    <MudListItem Icon="@Icons.Material.Filled.Cloud">
+                                        Orchestration Kubernetes
+                                    </MudListItem>
+                                    <MudListItem Icon="@Icons.Material.Filled.Build">
+                                        Pipelines CI/CD
+                                    </MudListItem>
+                                    <MudListItem Icon="@Icons.Material.Filled.Security">
+                                        Sécurité des applications
+                                    </MudListItem>
+                                </MudList>
+                            </MudPaper>
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <MudAlert Severity="Severity.Info" Variant="Variant.Filled" Class="mt-4">
+                                <MudText>
+                                    Si vous avez des projets ou des défis dans ces domaines, je suis prêt à collaborer 
+                                    et à contribuer tout en continuant d'apprendre. Mon objectif est d'évoluer chaque jour 
+                                    pour devenir un expert alliant backend robuste, sécurité renforcée et déploiement optimisé.
+                                </MudText>
+                            </MudAlert>
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<Skill> _backendSkills = new()
+    {
+        new Skill { Name = "C# / .NET", Level = 70 },
+        new Skill { Name = "Blazor", Level = 80 },
+        new Skill { Name = "SQL Server", Level = 55 },
+        new Skill { Name = "Azure DevOps", Level = 60 },
+        new Skill { Name = "Git", Level = 60 }
+        // new Skill { Name = "Clean Architecture", Level = 80 }
+    };
+
+    private List<Certification> _certifications = new();
+    // {
+    //     new Certification 
+    //     { 
+    //         Name = "Microsoft Certified: Azure Developer Associate",
+    //         Issuer = "Microsoft",
+    //         Year = "2023"
+    //     }
+    // };
+
+    public class Skill
+    {
+        public string Name { get; set; } = string.Empty;
+        public int Level { get; set; }
+    }
+
+    public class Certification
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Issuer { get; set; } = string.Empty;
+        public string Year { get; set; } = string.Empty;
+    }
+}

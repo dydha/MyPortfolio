@@ -1,0 +1,47 @@
+﻿.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--mud-palette-dark) 0%, var(--mud-palette-primary-darken) 100%);
+}
+
+.floating-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.feature-card {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+.tech-card {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+}
+
+    .tech-card:hover {
+        transform: translateY(-5px);
+    }
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+}

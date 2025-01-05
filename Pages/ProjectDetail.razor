@@ -1,0 +1,134 @@
+﻿@page "/project/{Id:int}"
+
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+
+@* <MudThemeProvider Theme="_customTheme" /> *@
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@if(_isLoading)
+{
+    <MudProgressCircular Color="Color.Primary" Style="height:70px;width:70px;" Indeterminate="true" />
+}
+else if(_project is null)
+{
+    <MudAlert Severity="Severity.Error">Projet introuvable.</MudAlert>
+
+}
+else
+{
+    <MudContainer MaxWidth="MaxWidth.False" Class="pa-0">
+        <!-- Hero Section -->
+        <MudContainer Class="hero-section d-flex align-center" MaxWidth="MaxWidth.False">
+            <MudContainer MaxWidth="MaxWidth.Large">
+                <MudGrid>
+                    <MudItem xs="12" md="4" Class="d-flex flex-column justify-center">
+                        <MudText Typo="Typo.h2" Color="Color.Primary" Class="font-weight-bold mb-4">
+                            @_project.Title
+                        </MudText>
+                        <MudText Typo="Typo.h5" Color="Color.Surface" Class="mb-8">
+                            @_project.Description
+                        </MudText>
+                        @if (!String.IsNullOrEmpty(_project.DemoUrl))
+                        {
+                            <div class="d-flex gap-4">
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       Size="Size.Large"
+                                       OnClick="GoToProject"
+                                       StartIcon="@Icons.Material.Filled.PlayArrow">
+                                Essayer Gratuitement
+                            </MudButton>
+                            <MudButton Variant="Variant.Outlined"
+                                       Color="Color.Primary"
+                                       Size="Size.Large"
+                                       Href="#features"
+                                       StartIcon="@Icons.Material.Filled.Info">
+                                En Savoir Plus
+                            </MudButton>
+                        </div>
+                        }
+                    </MudItem>
+                    <MudItem xs="12"  md="8" Class="d-flex justify-center align-center">
+                        <MudCarousel Class="mud-width-full" Style="height:500px; width: 700px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+                            @foreach (string image in _project.Images)
+                            {
+                                <MudCarouselItem Transition="Transition.Slide" Color="@Color.Primary">
+
+                                    <MudImage Src="@image"
+                                              Alt="App Preview"
+                                              Width="700"
+                                              Height="500"
+                                              ObjectFit="ObjectFit.Contain"
+                                              Class=" floating-animation" />
+
+                                </MudCarouselItem>
+                            }
+                        </MudCarousel>
+
+                    </MudItem>
+                </MudGrid>
+            </MudContainer>
+        </MudContainer>
+
+        <!-- Features Section -->
+        <MudContainer id="features" Class="py-16" MaxWidth="MaxWidth.Large">
+            <MudText Typo="Typo.h3" Align="Align.Center" Color="Color.Primary" Class="mb-12">
+                Fonctionnalités Principales
+            </MudText>
+            <MudGrid Spacing="6">
+                @foreach (var feature in _project.Features)
+                {
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudCard Elevation="0" Class="feature-card">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudIcon Icon="@feature.Icon"
+                                             Color="Color.Primary"
+                                             Size="Size.Large"
+                                             Class="mb-4" />
+                                    <MudText Typo="Typo.h5" Color="Color.Primary">
+                                        @feature.Name
+                                    </MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudText Color="Color.Surface">
+                                    @feature.Description
+                                </MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudContainer>
+
+        <!-- Tech Stack Section -->
+        <MudContainer Class="tech-stack-section py-16" MaxWidth="MaxWidth.Large">
+            <MudText Typo="Typo.h3" Align="Align.Center" Color="Color.Primary" Class="mb-12">
+                Technologies Utilisées
+            </MudText>
+            <MudGrid>
+                @foreach (var tech in _project.Technologies)
+                {
+                    <MudItem xs="6" sm="4" md="3">
+                        <div class="d-flex flex-column align-center tech-card">
+                            <MudIcon Icon="@tech.Icon"
+                                     Color="Color.Primary"
+                                     Size="Size.Large"
+                                     Class="mb-4" />
+                            <MudText Typo="Typo.h6" Color="Color.Primary">@tech.Name</MudText>
+                                <MudText Typo="Typo.body2"
+                                         Color="Color.Surface"
+                                         Align="Align.Center">
+                                    @tech.Description
+                            </MudText>
+                        </div>
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudContainer>
+    </MudContainer>
+}
+

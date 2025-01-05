@@ -1,0 +1,23 @@
+﻿
+<MudPaper Class="pa-4 mt-8" Elevation="2">
+    <MudGrid>
+        <MudItem xs="12" Class="d-flex justify-space-between align-center">
+            <MudText Typo="Typo.h5" Color="Color.Primary">Mon CV</MudText>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudAlert Severity="Severity.Info" Class="my-2">
+                Vous pouvez consulter mon CV en ligne ou le télécharger au format PDF.
+            </MudAlert>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPaper Class="pa-4" Style="height: 800px;">
+                <iframe src="/documents/dydha_mpandou_cv.pdf"
+                        style="width: 100%; height: 100%; border: none;"
+                        title="CV Preview">
+                </iframe>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudPaper>

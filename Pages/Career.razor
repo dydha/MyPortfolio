@@ -1,0 +1,154 @@
+@page "/parcours"
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudText Typo="Typo.h3" Class="mb-8">Mon Parcours</MudText>
+
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Expériences Professionnelles</MudText>
+            <MudTimeline>
+                @foreach (var experience in _experiences.Where(e => e.Type == ExperienceType.Professional))
+                {
+                    <MudTimelineItem Color="Color.Primary">
+                        <ItemOpposite>
+                            <MudText Color="Color.Primary">@experience.Period</MudText>
+                        </ItemOpposite>
+                        <ItemContent>
+                            <MudCard Elevation="4" Class="mb-4">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudText Typo="Typo.h6">@experience.Position</MudText>
+                                        <MudText Typo="Typo.subtitle1" Color="Color.Primary">@experience.Company</MudText>
+                                        <MudText Typo="Typo.body2">@experience.Location</MudText>
+                                    </CardHeaderContent>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText>@experience.Description</MudText>
+                                    @if (experience.Technologies.Any())
+                                    {
+                                        <MudChipSet T="string" Class="mt-4">
+                                            @foreach (var tech in experience.Technologies)
+                                            {
+                                                <MudChip Color="Color.Primary" Size="Size.Small">@tech</MudChip>
+                                            }
+                                        </MudChipSet>
+                                    }
+                                </MudCardContent>
+                            </MudCard>
+                        </ItemContent>
+                    </MudTimelineItem>
+                }
+            </MudTimeline>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudText Typo="Typo.h5" Color="Color.Secondary" Class="mb-4">Formation</MudText>
+            <MudTimeline>
+                @foreach (var education in _experiences.Where(e => e.Type == ExperienceType.Education))
+                {
+                    <MudTimelineItem Color="Color.Secondary">
+                        <ItemOpposite>
+                            <MudText Color="Color.Secondary">@education.Period</MudText>
+                        </ItemOpposite>
+                        <ItemContent>
+                            <MudCard Elevation="4" Class="mb-4">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudText Typo="Typo.h6">@education.Position</MudText>
+                                        <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@education.Company</MudText>
+                                        <MudText Typo="Typo.body2">@education.Location</MudText>
+                                    </CardHeaderContent>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText>@education.Description</MudText>
+                                </MudCardContent>
+                            </MudCard>
+                        </ItemContent>
+                    </MudTimelineItem>
+                }
+            </MudTimeline>
+        </MudItem>
+    </MudGrid>
+    <CvSection />
+</MudContainer>
+
+@code {
+    private readonly List<Experience> _experiences = new()
+    {
+        new Experience
+        {
+            Period = "Depuis 11/2023",
+            Position = "Freelance développeur logiciel",
+            Company = "Indépendant",
+            Location = "France",
+            Description = "Développement de solutions logicielles sur mesure",
+            Technologies = new[] { "C#", ".NET", "Blazor", "SQL Server" },
+            Type = ExperienceType.Professional
+        },
+        new Experience
+        {
+            Period = "03/2023 - 06/2023",
+            Position = "Stage développeur logiciel",
+            Company = "JKC CONSULTING",
+            Location = "France",
+            Description = "Stage de fin de formation en développement logiciel",
+            Technologies = new[] { "C#", ".NET", "SQL Server" },
+            Type = ExperienceType.Professional
+        },
+        new Experience
+        {
+            Period = "08/2021 - 07/2022",
+            Position = "Assistant Back-Office",
+            Company = "TotalEnergies-ProxiNordEst",
+            Location = "France",
+            Description = "Gestion du back-office et support aux opérations",
+            Type = ExperienceType.Professional
+        },
+        new Experience
+        {
+            Period = "10/2016 - 05/2019",
+            Position = "Vendeur",
+            Company = "COOP",
+            Location = "Pise, Italie",
+            Description = "Vente et conseil client",
+            Type = ExperienceType.Professional
+        },
+        new Experience
+        {
+            Period = "2023",
+            Position = "Titre professionnel niveau 6 concepteur développeur d'applications",
+            Company = "EESC-CCI FORMATION",
+            Location = "Laxou, France",
+            Description = "Formation en conception et développement d'applications",
+            Technologies = new[] { "C#", ".NET", "SQL", "Web" },
+            Type = ExperienceType.Education
+        },
+        new Experience
+        {
+            Period = "2015",
+            Position = "Licence Informatique",
+            Company = "Université de Pise",
+            Location = "Pise, Italie",
+            Description = "Formation universitaire en informatique",
+            Type = ExperienceType.Education
+        }
+    };
+
+    public record Experience
+    {
+        public required string Period { get; init; }
+        public required string Position { get; init; }
+        public required string Company { get; init; }
+        public required string Location { get; init; }
+        public required string Description { get; init; }
+        public string[] Technologies { get; init; } = Array.Empty<string>();
+        public ExperienceType Type { get; init; }
+    }
+
+    public enum ExperienceType
+    {
+        Professional,
+        Education
+    }
+
+}

@@ -1,0 +1,49 @@
+@page "/projets"
+@using MyPortfolio.Models
+@using MyPortfolio.Services
+
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudText Typo="Typo.h3" Class="mb-8">Mes Projets</MudText>
+    
+    <MudGrid>
+        @foreach (var project in _projects)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="4" Class="h-100">
+                    <MudCardMedia Image="@project.ImageUrl" Height="200"/>
+                    <MudCardContent>
+                        <MudText Typo="Typo.h5" Class="mb-2">@project.Title</MudText>
+                        <MudText Typo="Typo.body2">@project.Description</MudText>
+                        <MudChipSet T="string" Class="mt-4">
+                            @foreach (var tech in project.Technologies.Take(3))
+                            {
+                                <MudChip Size="Size.Small" Color="Color.Primary">@tech.Name</MudChip>
+                            }
+                            @if (project.Technologies.Length > 3)
+                            {
+                                <MudChip Size="Size.Small" Color="Color.Secondary">+@(project.Technologies.Length - 3)</MudChip>
+                            }
+                        </MudChipSet>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Text" Color="Color.Primary" 
+                                 Href="@($"/project/{project.Id}")">
+                            Voir Détails
+                        </MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+@code{
+
+    private List<Project> _projects = [];
+
+    protected override void OnInitialized()
+    {
+        _projects = ProjectService.GetAll();
+    }
+  }                              

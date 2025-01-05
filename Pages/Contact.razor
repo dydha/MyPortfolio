@@ -1,0 +1,99 @@
+@page "/contact"
+@* @inject IEmailService EmailService *@
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-16">
+    <MudText Typo="Typo.h3" Class="mb-8">Me Contacter</MudText>
+
+    <MudCard Elevation="4">
+        <MudForm @ref="_form" @bind-IsValid="@_success">
+            <MudCardContent>
+                <MudTextField @bind-Value="_contactModel.Name" Label="Nom"
+                             Required="true" RequiredError="Le nom est requis"/>
+                
+                @* <MudTextField @bind-Value="_contactModel.Email" Label="Email"
+                             Required="true" RequiredError="L'email est requis"
+                             Validation="@(new EmailAddressAttribute() {ErrorMessage = "L'adresse email n'est pas valide"})"/> *@
+
+                <MudTextField @bind-Value="_contactModel.Email" Label="Email"
+                Required="true" RequiredError="L'email est requis"
+                />
+                
+                <MudTextField @bind-Value="_contactModel.Message" Label="Message"
+                             Required="true" RequiredError="Le message est requis"
+                             Lines="5"/>
+            </MudCardContent>
+            
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" 
+                          Class="ml-auto" OnClick="Submit" 
+                          Disabled="@(!_success || _processing)">
+                    @if (_processing)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                        <MudText Class="ms-2">Envoi en cours...</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Envoyer</MudText>
+                    }
+                </MudButton>
+            </MudCardActions>
+        </MudForm>
+    </MudCard>
+
+    <MudPaper Class="d-flex justify-center mt-8 pa-4" Elevation="0">
+        <MudStack Row="true" Spacing="4">
+           
+            <MudNavLink Href="https://github.com/dydha" Target="_blank">
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub"
+                               Color="Color.Default" Size="Size.Large"
+                               />
+            </MudNavLink> 
+            <MudNavLink Href="https://www.linkedin.com/in/dydha-mpandou-3575a4105/" Target="_blank">
+                <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn"
+                               Color="Color.Default" Size="Size.Large"
+                               />
+            </MudNavLink>
+            
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudForm _form = null!;
+    private bool _success;
+    private bool _processing;
+    private ContactModel _contactModel = new();
+
+    private async Task Submit()
+    {
+        await _form.Validate();
+        
+        if (_success)
+        {
+            _processing = true;
+            try
+            {
+               // await EmailService.SendEmailAsync(_contactModel);
+                _contactModel = new ContactModel();
+                Snackbar.Add("Message envoyé avec succès!", Severity.Success);
+            }
+            catch (Exception)
+            {
+                Snackbar.Add("Une erreur est survenue lors de l'envoi du message.", Severity.Error);
+            }
+            finally
+            {
+                _processing = false;
+            }
+        }
+    }
+
+    public class ContactModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+    }
+}

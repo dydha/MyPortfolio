@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="@_theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        @* <MudText Typo="Typo.h6">Dydha Mpandou</MudText> *@
+        <MudSpacer />
+        <div style="display: flex; flex-direction : row; align-items : center; gap : 5px;">
+            <MudNavLink Href="https://github.com/dydha" Target="_blank">
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub"
+                               Color="Color.Inherit" />
+            </MudNavLink>
+            <MudNavLink Href="https://www.linkedin.com/in/dydha-mpandou-3575a4105/" Target="_blank">
+                <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn"
+                               Color="Color.Inherit" />
+            </MudNavLink>
+        </div>
+        @* <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/dydha" Target="_blank" />
+        <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Inherit" Link="https://www.linkedin.com/in/dydha-mpandou-3575a4105/" Target="_blank" /> *@
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu />
+    </MudDrawer>
+
+    <MudMainContent Style="margin : 10px;">
+        @Body
+    </MudMainContent>
+
+    <MudScrollToTop>
+        <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.KeyboardArrowUp" />
+    </MudScrollToTop>
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = true;
+    private MudTheme _theme = new MudTheme
+        {
+            PaletteLight = new PaletteLight
+            {
+                Primary = "#1E88E5",
+                Secondary = "#424242",
+                AppbarBackground = "#1E88E5",
+                Background = "#F5F5F5",
+                DrawerBackground = "#FFF",
+                DrawerText = "rgba(0,0,0, 0.7)",
+                Success = "#007E33"
+            }
+        };
+
+    private void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
