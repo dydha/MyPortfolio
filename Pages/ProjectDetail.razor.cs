@@ -21,11 +21,11 @@ namespace MyPortfolio.Pages
             _isLoading = false;
             return Task.CompletedTask;
         }
-        private void GoToProject()
-        {
-            if (string.IsNullOrEmpty(_project?.DemoUrl)) return;
+        //private void GoToProject()
+        //{
+        //    if (string.IsNullOrEmpty(_project?.DemoUrl)) return;
 
-            _navigationManager.NavigateTo(_project.DemoUrl);
-        }
+        //    _navigationManager.NavigateTo(_project.DemoUrl);
+        //}
     }
 }

@@ -33,20 +33,22 @@ else
                         @if (!String.IsNullOrEmpty(_project.DemoUrl))
                         {
                             <div class="d-flex gap-4">
-                            <MudButton Variant="Variant.Filled"
-                                       Color="Color.Primary"
-                                       Size="Size.Large"
-                                       OnClick="GoToProject"
-                                       StartIcon="@Icons.Material.Filled.PlayArrow">
-                                Essayer Gratuitement
-                            </MudButton>
-                            <MudButton Variant="Variant.Outlined"
+                                <MudNavLink Href="@_project.DemoUrl" Target="_blank">
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               Size="Size.Large"
+                                               StartIcon="@Icons.Material.Filled.PlayArrow">
+                                        Essayez l'application
+                                    </MudButton>
+                                </MudNavLink>
+                                
+                            @* <MudButton Variant="Variant.Outlined"
                                        Color="Color.Primary"
                                        Size="Size.Large"
                                        Href="#features"
                                        StartIcon="@Icons.Material.Filled.Info">
                                 En Savoir Plus
-                            </MudButton>
+                            </MudButton> *@
                         </div>
                         }
                     </MudItem>

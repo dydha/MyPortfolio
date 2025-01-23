@@ -3,6 +3,9 @@
 @inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-16">
+    <MudAlert Severity="Severity.Info">
+         L'option de contact par formulaire est momentanément indisponible. Pour toute demande, merci de me contacter directement par email à dydhampandou@gmail.com ou via LinkedIn.
+    </MudAlert>
     <MudText Typo="Typo.h3" Class="mb-8">Me Contacter</MudText>
 
     <MudCard Elevation="4">
@@ -65,6 +68,7 @@
     private bool _success;
     private bool _processing;
     private ContactModel _contactModel = new();
+
 
     private async Task Submit()
     {

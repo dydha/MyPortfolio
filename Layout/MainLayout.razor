@@ -1,8 +1,12 @@
 ﻿@inherits LayoutComponentBase
+@using BlazorThemeSwitcher.Components
+@using BlazorThemeSwitcher.Services
+@inject ThemeService _themeService
 
-<MudThemeProvider Theme="@_theme" />
+<MudThemeProvider Theme="_themeService.CurrentTheme" @bind-IsDarkMode="_isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
+<MudPopoverProvider />
 
 <MudLayout>
     <MudAppBar Elevation="1">
@@ -19,6 +23,7 @@
                                Color="Color.Inherit" />
             </MudNavLink>
         </div>
+        <BlazorThemeSwitcher.Components.ThemeSwitcher />
         @* <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/dydha" Target="_blank" />
         <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Inherit" Link="https://www.linkedin.com/in/dydha-mpandou-3575a4105/" Target="_blank" /> *@
     </MudAppBar>
@@ -32,26 +37,23 @@
     </MudMainContent>
 
     <MudScrollToTop>
-        <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.KeyboardArrowUp" />
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.KeyboardArrowUp" />
     </MudScrollToTop>
 </MudLayout>
 
 @code {
     private bool _drawerOpen = true;
-    private MudTheme _theme = new MudTheme
-        {
-            PaletteLight = new PaletteLight
-            {
-                Primary = "#1E88E5",
-                Secondary = "#424242",
-                AppbarBackground = "#1E88E5",
-                Background = "#F5F5F5",
-                DrawerBackground = "#FFF",
-                DrawerText = "rgba(0,0,0, 0.7)",
-                Success = "#007E33"
-            }
-        };
+    private bool _isDarkMode;
+    protected override void OnInitialized()
+    {
+        _themeService.ThemeChanged += OnThemeChanged;
 
+    }
+    private void OnThemeChanged(bool value)
+    {
+        _isDarkMode = value;
+        StateHasChanged();
+    }
     private void ToggleDrawer()
     {
         _drawerOpen = !_drawerOpen;

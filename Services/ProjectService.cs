@@ -63,7 +63,7 @@ namespace MyPortfolio.Services
 
             new Project
             {
-                Id = 2,
+                Id = 4,
                 Title = "FleetFactory",
                 Description = "Une application pour gérer un parc automobile avec des fonctionnalités de création, recherche et gestion des véhicules.",
                 Technologies = new[]
@@ -88,7 +88,7 @@ namespace MyPortfolio.Services
             },
             new Project
             {
-                Id = 3,
+                Id = 5,
                 Title = "DeliveryPlanning",
                 Description = "Une application qui permet de planifier les itinéraires de livraison en fonction de différentes stratégies (distance la plus courte, coût le plus bas, temps le plus rapide).",
                 Technologies = new[]
@@ -112,7 +112,7 @@ namespace MyPortfolio.Services
             },
             new Project
             {
-                Id = 4,
+                Id = 6,
                 Title = "BankApp",
                 Description = "Un système bancaire minimaliste avec gestion des comptes, des transactions, et des intérêts basé sur une architecture modulaire.",
 
@@ -141,7 +141,7 @@ namespace MyPortfolio.Services
             },
             new Project
             {
-                Id = 5,
+                Id = 2,
                 Title = "CV Generator",
                 Description = "Une application permettant aux utilisateurs de créer, prévisualiser et télécharger des CV professionnels en PDF, avec un design moderne et des options de personnalisation avancées.",
                 Technologies = new[]
@@ -165,9 +165,50 @@ namespace MyPortfolio.Services
                     "/Images/Projects/CvGenerator/cv-generator.png"
                 },
                 GitHubUrl = "https://github.com/votre-username/cv-generator",
+                DemoUrl = "https://cvgenerator20250123200322.azurewebsites.net",
                 ImageUrl = "/Images/Projects/CvGenerator/cv-generator.png"
             },
 
+            new Project
+            {
+                Id = 3,
+                Title = "WeConnect",
+                Description = "WeConnect est un réseau social complet offrant des fonctionnalités de publication, d’interaction sociale, de messagerie, de recherche et de gestion des relations entre utilisateurs.",
+
+                Technologies = new[]
+                {
+                    ("C#", "Langage puissant et flexible", Icons.Material.Filled.Code),
+                    (".NET Core MVC", "Framework puissant pour développer des applications web dynamiques", Icons.Custom.Brands.Microsoft),
+                    ("SQL Server", "Base de données robuste et performante", Icons.Material.Filled.Storage),
+                    ("Entity Framework Core", "ORM performant et facile à utiliser", Icons.Material.Filled.Storage),
+                    ("SignalR", "Communication en temps réel", Icons.Material.Filled.Stream),
+                    ("Javascript", "Langage pour des interfaces dynamiques", Icons.Material.Filled.Web),
+                    ("JQuery", "Simplifie les interactions avec le DOM", Icons.Material.Filled.Devices),
+                    ("Razor", "Syntaxe fluide pour les vues", Icons.Material.Filled.ViewModule),
+                    ("CSS", "Conception visuelle et responsive", Icons.Material.Filled.Style),
+                    ("MSTest", "Framework de tests unitaires", Icons.Material.Filled.BugReport),
+                },
+                Features = new[]
+                {
+                    ("Gestion des Publications", "Créez, modifiez, et supprimez des publications", Icons.Material.Filled.Edit),
+                    ("Commentaires et Likes", "Interagissez avec les publications via des likes et des commentaires", Icons.Material.Filled.ThumbUp),
+                    ("Amis et Messagerie", "Envoyez des demandes d’amitié et échangez des messages privés", Icons.Material.Filled.Group),
+                    ("Blocage d'Utilisateurs", "Protégez votre profil et vos publications", Icons.Material.Filled.Block),
+                    ("Notifications", "Restez informé des interactions sur vos publications", Icons.Material.Filled.Notifications),
+                    ("Recherche Avancée", "Trouvez des publications par contenu ou auteur", Icons.Material.Filled.Search),
+                    ("Statut de Connexion", "Voyez qui est en ligne", Icons.Material.Filled.Visibility),
+                },
+                Images = new[]
+                {
+                    "/Images/Projects/WeConnect/weconnect1.png",
+                    "/Images/Projects/WeConnect/weconnect2.png",
+                    "/Images/Projects/WeConnect/weconnect3.png",
+                    "/Images/Projects/WeConnect/weconnect4.png",
+                    "/Images/Projects/WeConnect/weconnect5.png",
+                },
+                GitHubUrl = "https://github.com/votre-username/weconnect",
+                ImageUrl = "/Images/Projects/WeConnect/weconnect2.png"
+            }
 
         };
 
@@ -177,7 +218,7 @@ namespace MyPortfolio.Services
         }
         public static List<Project> GetAll()
         {
-          return  _projects.Count > 0 ? _projects : [];
+          return  _projects.Count > 0 ? _projects.OrderBy(p => p.Id).ToList() : [];
         }
     }
 }
