@@ -23,6 +23,7 @@ namespace MyPortfolio.Services
                     ("DDD", "Conception dirigée par le domaine", Icons.Material.Filled.Domain),
                     ("MudBlazor", "Composants UI modernes", Icons.Material.Filled.Palette),
                     ("Entity Framework", "ORM puissant et flexible", Icons.Material.Filled.Storage),
+                    ("Javascript", "Langage pour des interfaces dynamiques", Icons.Material.Filled.Web),
                     ("SignalR", "Communication en temps réel", Icons.Material.Filled.Stream)
                 },
                     Features = new[]
@@ -150,6 +151,7 @@ namespace MyPortfolio.Services
                     (".NET 8", "Un framework robuste et moderne", Icons.Custom.Brands.Microsoft),
                     ("Blazor", "Interface web interactive avec C#", Icons.Material.Filled.Web),
                     ("MudBlazor", "Framework basé sur Material Design pour Blazor", Icons.Material.Filled.Palette),
+                    ("Javascript", "Langage pour des interfaces dynamiques", Icons.Material.Filled.Web),
                     ("HTML2PDF", "Bibliothèque pour la génération de PDF", Icons.Material.Filled.PictureAsPdf)
                 },
                 Features = new[]
