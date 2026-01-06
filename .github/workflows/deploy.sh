@@ -16,14 +16,7 @@ DEPLOY_PATH="/var/www/myportfolio"
 # Couleurs pour les messages
 GREEN='\033[0;32m'
 RED='\033[0;31m'
-YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
-
-# Vérification de la présence de .NET
-if ! command -v dotnet &> /dev/null; then
-    echo -e "${RED}❌ .NET SDK n'est pas installé. Veuillez l'installer d'abord.${NC}"
-    exit 1
-fi
 
 # Étape 1: Build du projet
 echo -e "${GREEN}📦 Construction du projet...${NC}"
@@ -33,13 +26,9 @@ dotnet publish --configuration Release --output ./publish
 echo -e "${GREEN}📤 Envoi des fichiers sur le VPS...${NC}"
 scp -P $VPS_PORT -r ./publish/wwwroot/* $VPS_USER@$VPS_HOST:$DEPLOY_PATH/
 
-# Étape 3: Configuration des permissions et redémarrage de Nginx
-echo -e "${GREEN}🔧 Configuration des permissions...${NC}"
-ssh -p $VPS_PORT $VPS_USER@$VPS_HOST << EOF
-    sudo chown -R www-data:www-data $DEPLOY_PATH
-    sudo chmod -R 755 $DEPLOY_PATH
-    sudo systemctl reload nginx
-EOF
+# Étape 3: Redémarrage de Nginx
+echo -e "${GREEN}🔄 Redémarrage de Nginx...${NC}"
+ssh -p $VPS_PORT $VPS_USER@$VPS_HOST "sudo systemctl reload nginx"
 
 echo -e "${GREEN}✅ Déploiement terminé avec succès!${NC}"
-echo -e "${YELLOW}💡 Visitez votre site pour vérifier le déploiement${NC}"
+

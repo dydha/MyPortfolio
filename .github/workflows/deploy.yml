@@ -52,4 +52,3 @@ jobs:
             sudo chown -R www-data:www-data /var/www/myportfolio
             sudo chmod -R 755 /var/www/myportfolio
             sudo systemctl reload nginx
-

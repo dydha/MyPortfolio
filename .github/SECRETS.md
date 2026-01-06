@@ -83,4 +83,3 @@ Si la connexion fonctionne sans mot de passe, la configuration est correcte.
 ### Erreur "Host key verification failed"
 - Ajoutez l'option `-o StrictHostKeyChecking=no` dans la configuration SSH (non recommandé en production)
 - Ou ajoutez la clé du VPS à `~/.ssh/known_hosts` manuellement
-
