@@ -1,0 +1,14 @@
+@using MyPortfolio.Services
+@inject ThemeService ThemeService
+
+<MudIconButton Icon="@(ThemeService.IsDarkMode ? Icons.Material.Filled.DarkMode : Icons.Material.Filled.LightMode)"
+               Color="Color.Inherit"
+               OnClick="ToggleTheme" />
+
+@code {
+    private async Task ToggleTheme()
+    {
+        await ThemeService.ToggleThemeAsync();
+    }
+}
+

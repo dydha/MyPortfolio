@@ -17,10 +17,5 @@
     <PackageReference Include="MudBlazor" Version="7.15.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="BlazorThemeSwitcher">
-      <HintPath>..\BlazorThemeSwitcher\bin\Debug\net8.0\BlazorThemeSwitcher.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 </Project>

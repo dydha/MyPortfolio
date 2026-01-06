@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@using BlazorThemeSwitcher.Components
-@using BlazorThemeSwitcher.Services
+@using MyPortfolio.Services
+@using MyPortfolio.Components
 @inject ThemeService _themeService
 
 <MudThemeProvider Theme="_themeService.CurrentTheme" @bind-IsDarkMode="_isDarkMode" />
@@ -23,7 +23,7 @@
                                Color="Color.Inherit" />
             </MudNavLink>
         </div>
-        <BlazorThemeSwitcher.Components.ThemeSwitcher />
+        <ThemeSwitcher />
         @* <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/dydha" Target="_blank" />
         <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Inherit" Link="https://www.linkedin.com/in/dydha-mpandou-3575a4105/" Target="_blank" /> *@
     </MudAppBar>
@@ -44,10 +44,11 @@
 @code {
     private bool _drawerOpen = true;
     private bool _isDarkMode;
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         _themeService.ThemeChanged += OnThemeChanged;
-
+        await _themeService.InitializeAsync();
+        _isDarkMode = _themeService.IsDarkMode;
     }
     private void OnThemeChanged(bool value)
     {
