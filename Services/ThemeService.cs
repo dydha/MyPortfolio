@@ -5,6 +5,7 @@ namespace MyPortfolio.Services;
 
 public class ThemeService
 {
+    //strinng
     private readonly ILocalStorageService _localStorage;
     private MudTheme _currentTheme;
     private bool _isDarkMode;
