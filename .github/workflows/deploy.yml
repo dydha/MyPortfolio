@@ -28,6 +28,11 @@ jobs:
       - name: Publish Blazor WebAssembly
         run: dotnet publish --configuration Release --output ./publish
 
+      - name: Create deployment archive
+        run: |
+          cd ./publish/wwwroot
+          tar -czf ../../deploy.tar.gz .
+
       - name: Deploy to VPS via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -35,11 +40,10 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
-          source: "./publish/wwwroot/*"
-          target: "/tmp/myportfolio-deploy"
-          strip_components: 2
+          source: "./deploy.tar.gz"
+          target: "/tmp/"
 
-      - name: Move files and restart Nginx
+      - name: Extract and deploy files
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -48,7 +52,9 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             sudo rm -rf /var/www/myportfolio/*
-            sudo mv /tmp/myportfolio-deploy/* /var/www/myportfolio/
+            sudo tar -xzf /tmp/deploy.tar.gz -C /var/www/myportfolio/
+            sudo rm /tmp/deploy.tar.gz
             sudo chown -R www-data:www-data /var/www/myportfolio
             sudo chmod -R 755 /var/www/myportfolio
             sudo systemctl reload nginx
+            echo "✅ Déploiement terminé avec succès!"
