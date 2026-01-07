@@ -8,6 +8,7 @@ public class ThemeService
     private readonly ILocalStorageService _localStorage;
     private MudTheme _currentTheme;
     private bool _isDarkMode;
+    //private Stream
 
     public event Action<bool>? ThemeChanged;
 
